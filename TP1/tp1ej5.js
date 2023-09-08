@@ -23,7 +23,7 @@ let menorEdad=function(perfil) {
 
     for (let i of perfil.amigos) {
         if (i.edad < masJoven.edad) {
-            masJoven = i.edad; 
+            masJoven = i; 
         }
     }
 

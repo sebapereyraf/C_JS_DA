@@ -41,11 +41,11 @@ let clase={
                 }
                 }
     ]
-}
+} 
 
 let mostrarPromedios=function(clase) {
     for (let estudiante of clase.estudiante) {
-        console.log("Promedio de calificaciones de "+ estudiante.nombre + "es de: " + estudiante.promedio);
+        console.log("Promedio de calificaciones de "+ estudiante.nombre + " es de: " + estudiante.promedio());
     }
 };
 
