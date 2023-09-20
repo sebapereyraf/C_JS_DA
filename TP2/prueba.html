@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <title>Tienda de Productos</title>
+</head>
+<body>
+    <h1>Tienda de Productos</h1>
+    <div id="productos">
+        <!-- Aquí se mostrarán los productos en imágenes -->
+        <div class="producto" id="producto_0">
+            <img src="img/laptop.jpg" alt="Laptop">
+            <p class="nombre">Laptop</p>
+            <p class="precio">1000</p>
+            <p class="potencia">Potencia: 500W</p>
+            <button data-id=0 data-tipo="electronico" onclick="agregarAlCarrito(this)">Agregar al carrito</button>
+        </div>
+        <div class="producto" id="producto_1">
+            <img src="img/manzanas.jpeg" alt="Manzanas">
+            <p class="nombre">Manzanas</p>
+            <p class="precio">2</p>
+            <p class="caducidad">Fecha de Caducidad: 01/10/2023</p>
+            <button data-id=1 data-tipo="alimenticio" onclick="agregarAlCarrito(this)">Agregar al carrito</button>
+        </div>
+        <!-- Agregar más productos aquí -->
+    </div>
+    <div id="carrito">
+        <label for="cantidad">Cantidad:</label>
+        <span id="cantidad"></span>
+        <button onclick="vaciarCarrito()">Vaciar Carrito</button>
+
+
+        <h2>Carrito de Compras</h2>
+        <ul id="lista-carrito">
+            <!-- Aquí se mostrarán los productos en el carrito -->
+        </ul>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
