@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js">   </script>
+    <!-- 
+    <link rel="stylesheet" href="style.css">  -->
+    <style>
+        .has-list {
+            border: 2px solid red; 
+        }
+        .highlight{
+            background-color: green;
+        }
+        .input-vacio {
+            background-color: red;
+        }
+
+
+    </style>
+    <title>TRABAJO PRACTICO 2</title>
+</head>
+<body>
+    <div class="container"> 
+        <h2>Ejercicio 1</h2>
+        <p>Este es un párrafo.</p> 
+        <ul> <li>Elemento1</li>
+             <li>Elemento2</li> 
+        </ul> 
+        <p>Otro párrafo.</p> 
+    </div>
+    
+    <div class="parent"> 
+        <h2>Ejercicio 2</h2>
+        <p>Párrafo1</p> 
+        <div> 
+            <span>Texto1</span> 
+            <span>Texto2</span> 
+        </div> 
+        <p>Párrafo2</p> 
+        <div> 
+            <span>Texto3</span> 
+            <span>Texto4</span> 
+        </div> 
+    </div>
+    
+    <div id="ej3"> 
+        <h2>Ejercicio 3</h2>
+        <ul> 
+            <li>Elemento1</li>
+            <li>Elemento2</li> 
+            <li>Elemento3</li> 
+            <li>Elemento4</li> 
+            <li>Elemento5</li> 
+        </ul>
+    </div>
+
+    <div class="container"> 
+        <h2>Ejercicio 4 y 5</h2>
+        <div class="box"> 
+            <p>Elemento1</p> 
+            <ul> 
+                <li>Item1</li>
+                <li>Item2</li> 
+            </ul> 
+        </div> 
+        <div class="box"> 
+            <p>Elemento2</p> 
+            <ul> 
+                <li>Item3</li> 
+                <li>Item4</li> 
+            </ul> 
+        </div> 
+    </div>
+
+    <div class="botones"> 
+        <h2>Ejercicio 6</h2>
+        <button id="btn1">Botón1</button> 
+        <button id="btn2">Botón2</button> 
+        <button id="btn3">Botón3</button>
+        
+    </div>
+
+    <div id="ej7"> 
+        <h2>Ejercicio 7</h2>
+        <form id="formulario">
+            <ul>
+                <li>
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" value=""> </input>
+                </li>
+                <span class="error" id="nombreError"></span>
+                <br><br>
+                <li>
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" id="apellido" name="apellido" value=""> </input>
+                </li>
+                <span class="error" id="apellidoError"></span>            
+                <br><br>
+                
+                <li>
+                    <label for="email">Correo Electronico:</label>
+                    <input type="email" id="email" name="email" value=""> </input>
+                </li>
+                <span class="error" id="emailError"></span>
+                <br>
+                <span class="error" id="emailError2"></span>            
+                <br><br>
+               
+                <li>
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" name="password" value=""> </input>
+                </li>
+                <span class="error" id="passwordError"></span>            
+                <br><br>
+                <li>
+                    <label for="password2">Repetir contraseña:</label>
+                    <input type="password" id="password2" name="password2" value=""> </input>
+                </li>
+                <span class="error" id="password2Error"></span> 
+                <br> 
+                <span class="error" id="password2Error2"></span>            
+                <br> 
+                <br>
+                <class="button">
+                    <button type="submit">Envíe formulario</button>
+            </ul>
+            
+        </form>
+        
+    </div>
+
+    <div id="ej8"> 
+        <h2>Ejercicio 8</h2>
+        <label>Paises</label>
+        <select id="pais">
+        <option>-</option>
+        </select>
+        </br></br></br>
+
+        <div id="infoPais" style="display: none"> 
+            <label>Información del Pais</label>
+            <p id="capital"></p>
+          
+        </div>
+
+    </div> 
+
+    <div id="ej9"> 
+        <h2>Ejercicio 9</h2>
+        <label>Select de estados</label>
+        <select id="estados">
+        <option>-</option>
+        </select>
+        </br></br></br>
+
+        <div id="ciudades" > 
+            <label>Información del Ciudades</label>
+            <select id="localidades">
+            <option>-</option>
+            </select>
+          
+        </div>
+
+    </div> 
+
+
+    <script src="script.js">
+    </script>
+</body>
+</html>
