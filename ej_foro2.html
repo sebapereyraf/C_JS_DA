@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foro de Discusión</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #forum {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;
+        }
+
+        #add-topic {
+            flex: 1;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+
+        #topic-form {
+            display: none;
+        }
+
+        #forum-table {
+            flex: 2;
+            border: 1px solid #ccc;
+        }
+
+        #forum-table th {
+            background-color: #f0f0f0;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Foro de Discusión</h1>
+
+    <div id="forum">
+        <div id="add-topic">
+            <button id="add-topic-button">Agregar Tema</button>
+            <form id="topic-form">
+                <label for="user">Usuario:</label>
+                <input type="text" id="user" required><br>
+                <label for="topic">Tema:</label>
+                <input type="text" id="topic" required><br>
+                <label for="message">Mensaje:</label>
+                <textarea id="message" required></textarea><br>
+                <button type="submit">Postear</button>
+            </form>
+        </div>
+        <table id="forum-table">
+            <thead>
+                <tr>
+                    <th>Tema</th>
+                    <th>Autor</th>
+                    <th>Replicas</th>
+                    <th>Ultimo Mensaje</th>
+                </tr>
+            </thead>
+            <tbody id="topic-list"></tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#add-topic-button").click(function () {
+                $("#topic-form").toggle();
+            });
+
+            $("#topic-form").submit(function (e) {
+                e.preventDefault();
+
+                const user = $("#user").val();
+                const topic = $("#topic").val();
+                const message = $("#message").val();
+                const date = new Date().toLocaleString();
+
+                $("#topic-list").append(
+                    `<tr>
+                        <td>${topic}</td>
+                        <td>${user}</td>
+                        <td class="replies">1</td>
+                        <td>${date}</td>
+                    </tr>`
+                );
+
+                // Actualiza el contador de réplicas
+                const topics = $(".replies");
+                topics.each(function () {
+                    const author = $(this).prev().text();
+                    const count = topics.filter(function () {
+                        return $(this).prev().text() === author;
+                    }).length;
+                    $(this).text(count);
+                });
+
+                // Limpia el formulario
+                $("#user").val("");
+                $("#topic").val("");
+                $("#message").val("");
+
+                // Oculta el formulario
+                $("#topic-form").hide();
+            });
+        });
+    </script>
+</body>
+</html>

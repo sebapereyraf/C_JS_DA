@@ -1,0 +1,152 @@
+[{
+  "_id": {
+    "$oid": "65497fa2b5fc91e71f31f0d3"
+  },
+  "nombre": "Juan",
+  "apellido": "Perez",
+  "edad": "37",
+  "email": "juan@hotmail.com",
+  "ciudad": "Santa Rosa",
+  "provincia": "La Pampa",
+  "pais": "Argentina",
+  "usuario": "Admin",
+  "password": "Administracion1+",
+  "rol": "admin"
+},
+{
+  "_id": {
+    "$oid": "654980d49c1e14bf74de145e"
+  },
+  "nombre": "Pedro",
+  "apellido": "Fernandez",
+  "edad": 37,
+  "email": "pedro@hotmail.com",
+  "ciudad": "Santa Rosa",
+  "provincia": "La Pampa",
+  "pais": "Argentina",
+  "usuario": "Admin",
+  "password": "Administracion1+",
+  "rol": "admin",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654ad49e1d40c47a9e5c937c"
+  },
+  "nombre": "Sebastian",
+  "apellido": "Fernandez",
+  "edad": 20,
+  "email": "seba@hotmail.com",
+  "ciudad": "Santa Rosa",
+  "provincia": "La Pampa",
+  "pais": "Argentina",
+  "usuario": "Admin2",
+  "password": "$2b$10$xWuaXTyLKqg8c8JNvHYf/ubZiBQi64BGTTPNScVa5tym3hcnsetQW",
+  "rol": "admin",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654c144bf3f73cf4a2deaaf3"
+  },
+  "nombre": "Juan",
+  "apellido": "De los palotes",
+  "edad": 25,
+  "email": "juan@hotmail.com",
+  "ciudad": "SANTA PINK",
+  "provincia": "42",
+  "usuario": "Juanpalotes",
+  "password": "$2b$10$FYzeI3PvQYgE2mumXiHHi.fNU0GDUlGp.LkDG0LADkYXq.50IcPhm",
+  "rol": "user",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654c15a2f3f73cf4a2deaaf5"
+  },
+  "nombre": "Pedro",
+  "apellido": "sfsdf",
+  "edad": 25,
+  "email": "pedro@pedro.com",
+  "ciudad": "",
+  "provincia": "",
+  "usuario": "Pedro",
+  "password": "$2b$10$W/DJmJF1.JguR3dVPvwboOe0T76io9lzIS5A3ME4hJ8c0vT/Uaslm",
+  "rol": "user",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654c15e9f3f73cf4a2deaaf7"
+  },
+  "nombre": "Pedro",
+  "apellido": "sfsdf",
+  "edad": null,
+  "email": "pedro@pedro.com",
+  "ciudad": "",
+  "provincia": "",
+  "usuario": "Pedroff",
+  "password": "$2b$10$rspEfPww24qiez8EoPCiVOsM7n4Yd2kJt.OhS7qvRUk38jYwdtHXe",
+  "rol": "user",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654c1780f3f73cf4a2deaaf9"
+  },
+  "nombre": "Pedro",
+  "apellido": "sfsdf",
+  "edad": 10,
+  "email": "pedro@pedro.com",
+  "ciudad": "",
+  "provincia": "",
+  "usuario": "Otra vez",
+  "password": "$2b$10$hDqs8am3FIXQOrPIUfgiT.4l3TPfmDoc4BnspxHFQagpxw6eKLKB2",
+  "rol": "user",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654c17c6f3f73cf4a2deaafb"
+  },
+  "nombre": "asas",
+  "apellido": "fdbfbt",
+  "edad": null,
+  "email": "ssdsd@gmail.com",
+  "ciudad": "",
+  "provincia": "",
+  "usuario": "ssffeegveg",
+  "password": "$2b$10$ZTJ.uGHv0.D9N0Vo4AGJQeNAODtgo.pzttKOtwWuLlsU/szN.jKZe",
+  "rol": "user",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654c274ef448944b025b3f93"
+  },
+  "nombre": "sdas",
+  "apellido": "xcxzc",
+  "edad": 49,
+  "email": "sebas@seba.com",
+  "ciudad": "",
+  "provincia": "",
+  "usuario": "Juanpalotes2",
+  "password": "$2b$10$J9BbhDFJ/7s/c8WnB8gZBuOyWVe3jqyVH/mzq.dkryFZWQUFPfEEG",
+  "rol": "user",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6552a47bb362b059e2ee64e7"
+  },
+  "nombre": "Juan",
+  "apellido": "Carlos",
+  "edad": 30,
+  "email": "juan@carlos.com",
+  "ciudad": "Santa Rosa",
+  "provincia": "42",
+  "usuario": "JuanCarlos",
+  "password": "$2b$10$0bJ59lUyJ5YKXEz0e4oI3OulHNZ50nTJE36weQnnnDHA6Ik3Cu3XO",
+  "rol": "user",
+  "__v": 0
+}]

@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foro de Debate Ambiental</title>
+    <style>
+
+                
+        /* ////////////Estilo del header///////////////////////// */
+        header {
+            background-color: #333;
+            color: #fff;
+            height: 20px;
+            padding: 20px 0;
+            text-align: center;
+            cursor: pointer;
+            font-size: 18px
+        }
+
+        header a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 20px;
+        }
+
+        header a:hover {
+            font-weight: bold;
+            color: green;
+        }
+        #usuarioOpciones {
+            float: right;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Fin de Estilo del header*/
+
+        /* clase oculto es importante para solucionar algunos inconvenientes areaRespuestaDiv   */
+        .oculto {
+                display: none;
+        }
+
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #foro {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            margin: 20px;
+        }
+
+        #agregarTema,
+        #foroTabla,
+        #foroPorTema {
+            margin-bottom: 20px;  /* Establece el espacio entre los divs */
+        
+        }
+
+        /*Estilos para el Formularios para el posteo*/
+        #FormularioPosteo {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #FormularioPosteo label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        #FormularioPosteo input,
+        #FormularioPosteo textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        #FormularioPosteo button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #FormularioPosteo button:hover {
+            background-color: #2980b9;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        /*FIN Estilos para el Formularios para el posteo*/
+
+
+
+
+        #FormularioPosteo {
+            display: none;
+        }
+
+        #foroTabla {
+            flex: 2;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            overflow: hidden; /* Para agregar bordes redondeados a la tabla */
+        }
+
+        #foroTabla th {
+            background-color: #1d921b;
+            color: #fff;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .click {
+            cursor: pointer;
+            text-decoration: underline;
+            color: blue; 
+        }
+
+        .click:hover {
+            text-decoration: none; 
+        }
+
+        #foroPorTema {
+            background-color: rgba(124, 189, 104, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .temaPrincipalDiv{
+            background-color: rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }       
+
+        .temaPrincipalDiv h3 {
+            color: #5c9fcd;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .respuestaDiv{
+            background-color: rgba(108, 70, 70, 0.493);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }       
+
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="./inicio.html" id = "inicio">Inicio</a>
+        <a href="#">Temas</a>
+        <a href="#" id ="foroEnlace">Foro Web</a>
+        <div id="usuarioOpciones">
+            <a href="./formRegistro.html" id = "registrarse">Registrarse</a>
+            <a href="./formLogin.html" id = "login">Ingresar</a>
+        </div>
+    </header>
+
+    <h1>Foro de Discusión</h1>
+    
+    <div id="foro">
+        <div id="agregarTema">
+            <button id="agregarTemaBoton">Agregar Tema</button>
+            <form id="FormularioPosteo">
+                <label for="usuario">Usuario:</label>
+                <input type="text" id="usuario" required></input><br>
+
+                <label for="tema">Tema:</label>
+                <input type="text" id="tema" required></input><br>
+
+                <label for="mensaje">Mensaje:</label>
+                <textarea id="mensaje" required></textarea><br>
+
+                <button type="submit">Postear</button>
+            </form>
+        </div>
+        <div>
+            <table id="foroTabla">
+                <thead>
+                    <tr>
+                        <th>Tema</th>
+                        <th>Autor</th>
+                        <th>Replicas</th>
+                        <th>Ultimo Mensaje</th>
+                    </tr>
+                </thead>
+                <tbody id="filasPosteos"></tbody>
+            </table> 
+        </div>
+        <div id="foroPorTema"> </div>
+        
+        <div></div>
+        <div></div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script>
+        
+
+        $(document).ready(function () {
+            
+            header();
+
+            //***************Evento click sobre agregar boton************////
+            $("#agregarTemaBoton").click(function () {
+                $("#FormularioPosteo").toggle();
+            });
+
+            // Captar el evento click sobre un tema para captar su id y ejecutar la funcion mostrarTema
+
+            $(document).on("click", ".click", function () {
+                const postID = $(this).attr("id");
+                mostrarTema(postID);
+                console.log(postID);
+            });
+
+            /// Funcionalidad de recuperar el localStorage ya que no puedo hacer funcionar sesiones en el html/////
+            const usuarioLocal = JSON.parse(localStorage.getItem('dataLogueo'));
+
+            // Verifico si usuarioLocal existe y tiene la propiedad usuario
+            if (usuarioLocal && usuarioLocal.usuario) {
+                    $("#usuario").val(usuarioLocal.usuario); // Establecer el valor del campo de entrada "usuario" con el valor de usuarioLocal.usuario
+                }
+
+
+            const postTemaNuevo = [];
+
+            getPosteosTodos();
+
+            const datosGetPosteos = [];
+
+            const temaSeleccionado = [];
+            
+            
+
+            $("#FormularioPosteo").submit(function (e) {
+                e.preventDefault();
+
+                const usuario = $("#usuario").val();
+                const tema = $("#tema").val();
+                const mensaje = $("#mensaje").val();
+                const date = new Date();
+                const votos = 0;
+                const id_temaPost = "";
+                const id_respuestaMadre = "";
+
+                const newPostRaiz = {
+                    usuario: usuario,
+                    titulo: tema,
+                    contenido: mensaje,
+                    fecha: date,
+                    votos: votos,
+                    id_temaPost: id_temaPost,
+                    id_respuestaMadre: id_respuestaMadre
+                };
+
+                
+                enviarRespuestaAlServidor(newPostRaiz);
+
+                
+                $("#usuario").val("");
+                $("#tema").val("");
+                $("#mensaje").val("");
+
+                
+                $("#FormularioPosteo").hide();
+            
+            });
+            
+
+            function enviarRespuestaAlServidor(newPostRaiz) {
+                $.ajax({
+                    url: 'http://localhost:3000/posteos',  
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(newPostRaiz),
+                    success: function (response) {
+                        console.log('Respuesta enviada exitosamente al servidor:', response);
+                        
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('Error al enviar la respuesta al servidor:', status, error);
+                        
+                    }
+                });
+            }
+
+            function getPosteosTodos(){
+                $.ajax({
+                    url: 'http://localhost:3000/posteos',
+                    method: "GET",
+                    dataType: "json", 
+                    success: function(data) {
+                        data.forEach(function (objeto) {
+                            datosGetPosteos.push(objeto);
+                        });
+                        mostrarTemaRaiz(data);
+                    },
+                    error: function(xhr, status, error) {
+                        console.log("Error en la llamada AJAX:", status, error);
+                        alert("Error del servidor");
+                    }
+                });
+            }
+
+            function mostrarTemaRaiz(data) {
+                // Limpiar el arreglo postTemaNuevo
+                postTemaNuevo.length = 0;
+
+                // Filtrar los mensajes raíz (sin id_temaPost)
+                
+                data.forEach(function(post) {
+                    if (!post.id_temaPost) {
+                        postTemaNuevo.push(post);
+                    }
+                });
+
+                // Limpiar la tabla
+                $("#filasPosteos").empty();
+
+                // Recorrer los mensajes raíz y agregar filas a la tabla
+                postTemaNuevo.forEach(post => {
+                    const replicas = contarReplicas(data, post._id);
+                    const fila = `<tr>
+                                    <td class="click" id="${post._id}">${post.titulo}</td>
+                                    <td>${post.usuario}</td>
+                                    <td class="replies">${replicas}</td>
+                                    <td>${post.fecha}</td>
+                                </tr>`;
+                    $("#filasPosteos").append(fila);
+                });
+                
+            }
+
+            function contarReplicas(data, id_temaPost) {
+                // Contar réplicas para el tema dado
+                return data.filter(post => post.id_temaPost === id_temaPost).length;
+            }
+
+            
+            function mostrarTema(postID) {
+                
+                temaSeleccionado.length = 0; // vacio objeto cada vez que llamo la funcion
+
+                // Filtro los mensajes que coincidan con postID (Raiz) o tengan id_temaPost (respuestas a Raiz) igual a postID
+                datosGetPosteos.forEach(function(objeto){
+                    if (objeto._id === postID || objeto.id_temaPost === postID){
+                        temaSeleccionado.push(objeto)
+                    }                    
+                });
+
+
+                
+
+                // Separo Mensajes raíz de sus respuestas
+                const temaRaiz = temaSeleccionado.filter(post => !post.id_temaPost);
+                const temaRaizRespuestas = temaSeleccionado.filter(post => post.id_temaPost);
+
+                const foroPorTemaDiv = $("#foroPorTema");
+
+                
+                foroPorTemaDiv.empty(); // Limpio el div para que no se acumulen al hacer click en otro tema
+
+                // Creo el div temaPrincipal para el tema Raiz
+                const temaPrincipalDiv = $("<div>").addClass("temaPrincipalDiv").attr("id", temaRaiz[0]._id);  // le debo poner la posicion aunque si anda todo bien solo deberia haber un solo objeto dentro del array
+                temaPrincipalDiv.append(`<h3>${temaRaiz[0].titulo}</h3>`);
+                temaPrincipalDiv.append(`<p>Autor: ${temaRaiz[0].usuario}</p>`);
+                temaPrincipalDiv.append(`<p>${temaRaiz[0].contenido}</p>`);
+
+                temaPrincipalDiv.append(crearBotones(temaRaiz[0])); // agrego los botones
+                //temaPrincipalDiv.append(crearAreaRespuesta(temaRaiz[0]));// creo area respuesta si es llamada por click en responder
+
+                // Agrego el temaPrincipalDiv a foroPorTema
+                foroPorTemaDiv.append(temaPrincipalDiv);
+
+                // Recorro las respuestas a la Raiz y creo los divs para las respuestas y las respuestas
+                temaRaizRespuestas.forEach(respuesta => {
+                    const respuestaDiv = $("<div>").addClass("respuestaDiv").attr("id", respuesta._id);
+                    respuestaDiv.append(`<p>Autor: ${respuesta.usuario}</p>`);
+                    respuestaDiv.append(`<p>Respuesta a: ${respuesta.id_respuestaMadre}</p>`);
+                    respuestaDiv.append(`<p>${respuesta.contenido}</p>`);
+
+                    respuestaDiv.append(crearBotones(respuesta));
+                    //respuestaDiv.append(crearAreaRespuesta(respuesta));
+
+                    // Agrego los respuestaDiv a foroPorTema
+                    foroPorTemaDiv.append(respuestaDiv);
+                });
+                
+            }
+
+            function crearBotones(objeto) {
+                const botonesDiv = $("<div class='botones'></div>").attr("id", `botones_${objeto._id}`);
+                const botonMeGusta = $("<button class='boton' id='meGusta_${objeto._id}'>Me Gusta</button>").click(function () {
+                    
+                    console.log(`Me Gusta clickeado para el tema con ID megusta_${objeto._id}`);
+                });
+                const botonResponder = $("<button class='boton' id='responder_${objeto._id}'>Responder</button>").click(function () {
+                    const padre = $(this).closest('.temaPrincipalDiv, .respuestaDiv');
+                    const areaRespuesta = padre.find('.areaRespuesta'); // Busco si existe el área de respuesta dentro del div padre
+
+                    if (areaRespuesta.length > 0) {
+                        areaRespuesta.toggleClass('oculto'); // Toggleo a la clase 'oculto' para mostrar/ocultar 
+                    } else {
+                        padre.append(crearAreaRespuesta(objeto)); 
+                    }
+                    
+                    
+                    //const areaRespuesta = crearAreaRespuesta(objeto);
+                    //$(this).closest('.temaPrincipalDiv, .respuestaDiv').append(areaRespuesta); 
+                                    
+                    
+                    console.log(`Responder clickeado para el tema con ID responder_${objeto._id}`);
+                });
+                const botonDenunciar = $("<button class='boton' id='denunciar_${objeto._id}'>Denunciar</button>").click(function () {
+                    
+                    console.log(`Denunciar clickeado para el tema con ID denunciar_${objeto._id}`);
+                });
+                const botonEliminar = $("<button class='boton' id='eliminar_${objeto._id}'>Eliminar</button>").click(function () {
+                    
+                    console.log(`Eliminar clickeado para el tema con ID eliminar_${objeto._id}`);
+                });
+                botonEliminar.hide();
+
+                botonesDiv.append(botonMeGusta, botonResponder, botonDenunciar, botonEliminar);
+                return botonesDiv;
+            }
+
+            function crearAreaRespuesta(objeto) {
+                
+                const areaRespuestaDiv = $(`<div id="areaRespuesta_${objeto._id}"class="areaRespuesta"></div>`);
+                console.log("Área de respuesta creada para:", areaRespuestaDiv);
+                //const inputUsuario = $('<input type="text" placeholder="Usuario">');
+                const inputUsuario = $(`<input type="text" placeholder="Usuario" value="${usuarioLocal && usuarioLocal.usuario ? usuarioLocal.usuario : ''}">`);
+                const textareaRespuesta = $('<textarea placeholder="Escribe tu respuesta"></textarea>');
+                const botonEnviarRespuesta = $('<button>Enviar Respuesta</button>').click(function () {
+                    const usuarioRespuesta = inputUsuario.val();
+                    const contenidoRespuesta = textareaRespuesta.val();
+                    
+                    if (!usuarioRespuesta || !contenidoRespuesta) {
+                        alert("Por favor, ingresa tanto el usuario como el contenido de la respuesta antes de enviar.");
+                        return; // Evito enviar si falta información
+                    }
+                    
+                    
+                    const tituloRespuesta = objeto.titulo;
+                    const fechaRespuesta = new Date();
+                    const votosRespuesta = 0;
+                    const id_temaPostRespuesta = objeto.id_temaPost ? objeto.id_temaPost : objeto._id;;
+                    const id_respuestaMadreRespuesta = objeto._id;
+
+                    
+                    const respuestaPost = {
+                        usuario: usuarioRespuesta,
+                        titulo: tituloRespuesta,
+                        contenido: contenidoRespuesta,
+                        fecha: fechaRespuesta,
+                        votos: votosRespuesta,
+                        id_temaPost: id_temaPostRespuesta,
+                        id_respuestaMadre: id_respuestaMadreRespuesta
+                    };
+
+                    console.log(respuestaPost);
+
+                    enviarRespuestaAlServidor(respuestaPost);
+                    
+                    // Limpio y ocultar el área de respuesta después de enviar la respuesta
+                    inputUsuario.val("");
+                    textareaRespuesta.val("");
+                    //areaRespuestaDiv.hide();
+                    areaRespuestaDiv.addClass('oculto');
+                });
+
+                areaRespuestaDiv.append(inputUsuario, textareaRespuesta, botonEnviarRespuesta);
+                return areaRespuestaDiv;
+            }
+
+            function header(){
+                let usuarioLocal = JSON.parse(localStorage.getItem('dataLogueo')); 
+                console.log(usuarioLocal);
+                if (usuarioLocal){
+                    $('#registrarse').attr('href', '#').text(usuarioLocal.usuario);
+                    $('#login').attr('href', './inicio.html').text('Cerrar Sesión');
+                    $('#foroEnlace').attr('href', './ej_foro2.html');
+                    $('#login').on('click', function () {
+                        localStorage.removeItem("dataLogueo");
+                        alert('Sesión cerrada');
+                    })
+                }
+                else{
+                    $('#foroEnlace').on('click', function () {
+                        alert('Debe iniciar sesion para acceder');
+                    });
+                }
+            } 
+
+        
+
+
+
+        });
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foro de Debate</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .post {
+            display: flex;
+            flex-direction: column;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+
+        .post-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .author {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Foro de Debate</h1>
+
+    <!-- Formulario para publicar un nuevo post -->
+    <form id="post-form">
+        <label for="author">Autor:</label>
+        <input type="text" id="author" required>
+        <br>
+        <label for="subject">Asunto:</label>
+        <input type="text" id="subject" required>
+        <br>
+        <label for="message">Mensaje:</label>
+        <textarea id="message" required></textarea>
+        <br>
+        <button type="submit">Publicar</button>
+    </form>
+
+    <!-- Lista de conversaciones o posteos -->
+    <div id="post-list">
+        <!-- Los posteos se agregarán dinámicamente aquí -->
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const postForm = document.getElementById('post-form');
+            const postList = document.getElementById('post-list');
+
+            postForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const authorInput = document.getElementById('author');
+                const subjectInput = document.getElementById('subject');
+                const messageInput = document.getElementById('message');
+
+                const author = authorInput.value;
+                const subject = subjectInput.value;
+                const message = messageInput.value;
+
+                if (author && subject && message) {
+                    const post = document.createElement('div');
+                    post.classList.add('post');
+
+                    const postInfo = document.createElement('div');
+                    postInfo.classList.add('post-info');
+                    postInfo.innerHTML = `
+                        <span class="author">${author}</span>
+                        <span class="date">${getCurrentDateTime()}</span>
+                    `;
+
+                    const postSubject = document.createElement('div');
+                    postSubject.classList.add('subject');
+                    postSubject.textContent = `Asunto: ${subject}`;
+
+                    const postMessage = document.createElement('div');
+                    postMessage.classList.add('message');
+                    postMessage.textContent = message;
+
+                    post.appendChild(postInfo);
+                    post.appendChild(postSubject);
+                    post.appendChild(postMessage);
+                    postList.appendChild(post);
+
+                    authorInput.value = '';
+                    subjectInput.value = '';
+                    messageInput.value = '';
+                }
+            });
+
+            function getCurrentDateTime() {
+                const now = new Date();
+                const date = now.toLocaleDateString();
+                const time = now.toLocaleTimeString();
+                return `${date} ${time}`;
+            }
+        });
+    </script>
+</body>
+</html>

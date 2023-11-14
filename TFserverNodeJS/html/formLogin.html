@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <title>Iniciar Sesión</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url('./image/manosTierra.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        .container {
+            width: 33%;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.7); /* Ajusto la transparencia modificando el último valor */
+            border-radius: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        
+        .head {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .formLoguin {
+            display: flex;
+            flex-direction: column;
+            
+        }
+
+        .formLoguin input {
+            padding: 10px;
+            margin-bottom: 10px;
+            
+        }
+
+        .formLoguin button {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+            background-color: #4caf50;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="head" id="head">
+            <h2>Inicie Sesión</h2>
+            
+        </div>
+
+        <div class="formLoguin" id="formLoguin">
+            <label for="Usuario">Usuario o Email:</label>
+            <input type="text" id="user" placeholder="Usuario o Email" />
+            <span id="userError" style="color: red; display: none;">Completa este campo</span>
+
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" placeholder="Contraseña" />
+            <span id="passwordError" style="color: red; display: none;">Completa este campo</span>
+
+            <p><a href="#">¿Olvidó su contraseña?</a></p>
+
+            <button id="submitBtn" style="width:100%">Iniciar Sesión</button>
+            <button id = "registrar" style="width:100%">Registrarse</button>
+        </div>
+    </div>
+    <script>
+                      
+        $(document).ready(function () {
+            $("#registrar").click(function (event) {
+                $(location).attr('href', './formRegistro.html');
+                })
+
+            $("#submitBtn").click(function (event) {
+                event.preventDefault();
+                
+
+                // Validar que los campos no esten vacios
+                const userValue = $("#user").val();
+                const passwordValue = $("#password").val();
+
+                const formValido = true;
+
+                if (userValue === "") {
+                    $("#userError").show();
+                } else {
+                    $("#userError").hide();
+                }
+                
+                if (passwordValue === "") {
+                    $("#passwordError").show();
+                } else {
+                    $("#passwordError").hide();
+                }
+
+                 // Ocultar mensaje de error al escribir en los campos
+                 $("#user, #password").keyup(function () {
+                $(this).next("span").hide();
+                });
+
+                // Evito envío si los campos están vacíos
+                if (userValue === "" || passwordValue === "") {
+                    formValido=== false
+                    return;
+                }
+
+                               
+
+                if (formValido) {
+                    const dataLogueo ={
+                        usuario: userValue,
+                        password: passwordValue,
+                    } 
+                    
+                    console.log(dataLogueo),    
+
+                    ////////////////////////// Forma de funcionamiento para Usuario Local/////////
+
+                    localStorage.setItem("dataLogueo", JSON.stringify(dataLogueo));
+                    const dataUsuarioGuardado=JSON.parse(localStorage.getItem("dataLogueo"));
+                    console.log('Session guardada en localStorage',dataUsuarioGuardado.usuario); 
+                    alert("Ha iniciado sesión exitosamente de Manera Local");
+                             
+                    $(location).attr('href', './inicio.html');
+
+                    /////////////Fin de forma usuario LocalStorage /////////////////
+
+
+
+                    
+                    loguearUsuarioServidor(dataLogueo);
+
+                }
+                   
+                
+            });
+
+            // Función para realizar una solicitud AJAX de tipo POST para loguear al usuario
+            function loguearUsuarioServidor(respuestaJSON) {
+                    $.ajax({
+                        url: 'http://localhost:3000/usuarios/login', // 
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify(respuestaJSON),
+                        success: function (response) {
+                            console.log('Respuesta enviada exitosamente al servidor:', response);
+                            alert("Ha iniciado sesión exitosamente");
+                            $(location).attr('href', './inicio.html');
+
+                            
+                        },
+                        error: function (xhr, status, error) {
+                            console.log('Error al enviar la respuesta al servidor:', status, error);
+                            var errorResponse = JSON.parse(xhr.responseText);
+                            if (xhr.status === 401){
+                                //var errorResponse = JSON.parse(xhr.responseText);
+                                alert(errorResponse.message);
+                            }
+                            if (xhr.status === 500){
+                                alert(errorResponse.message);
+                                $(location).attr('href', './inicio.html');
+                            }
+                            //var errorResponse = JSON.parse(xhr.responseText);
+                            //alert(errorResponse.message);
+                            //$(location).attr('href', './inicio.html');
+                            
+                        }
+                    })
+                }       
+
+        });  
+
+
+     </script>
+</body>
+</html>

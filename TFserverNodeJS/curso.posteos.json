@@ -1,0 +1,99 @@
+[{
+  "_id": {
+    "$oid": "65482bb2263257183c90fd7e"
+  },
+  "usuario": "NombreDeUsuario",
+  "titulo": "Re: Esta es otra prueba,",
+  "contenido": "sdsdsdsdsdfvdfvdvdddsd",
+  "fecha": {
+    "$date": "2023-05-11T23:56:34.000Z"
+  },
+  "votos": 0,
+  "id_temaPost": "654699aa1fa349ccb7d97047",
+  "id_respuestaMadre": "654699aa1fa349ccb7d97047",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654bae3fdd29b55b98d7853c"
+  },
+  "usuario": "Florencia",
+  "titulo": "Milei: Privatizar rios y ballenas",
+  "contenido": "En un acto Milei expreso que \"una empresa puede contaminar un río todo lo que quiera\",  y analizo las causas de que esto suceda a la falta de asignacion de propiedad. Para el candidato, la contaminación se terminara cuando \"alguien vea un negocio\", y sostuvo que privatizar los rios seria una solucion a los problemas ambientales. Asimimo, otro mentor de del Partido Politico La Libertad Avanza (Benegas Lynch) sostiene la privatizacion de ballenas y mares....",
+  "fecha": {
+    "$date": "2023-08-11T15:29:42.000Z"
+  },
+  "votos": 0,
+  "id_temaPost": "",
+  "id_respuestaMadre": "654ba8eb40beaa1670572eaf",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654bae73dd29b55b98d7853e"
+  },
+  "usuario": "Seba",
+  "titulo": "Bienvenidos al Foro",
+  "contenido": "Este es un foro respecto a temas ambientales",
+  "fecha": {
+    "$date": "2023-08-11T15:29:42.000Z"
+  },
+  "votos": 0,
+  "id_temaPost": "",
+  "id_respuestaMadre": "654ba8eb40beaa1670572eaf",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654bd7d6dd29b55b98d7855f"
+  },
+  "usuario": "NombreDeUsuario",
+  "titulo": "Re: Bienvenidos al Foro",
+  "contenido": "Muy buena noticia, no me lo esperaba",
+  "fecha": {
+    "$date": "2023-08-11T18:47:50.000Z"
+  },
+  "votos": 0,
+  "id_temaPost": "654bae73dd29b55b98d7853e",
+  "id_respuestaMadre": "654bae73dd29b55b98d7853e",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654bd7f6dd29b55b98d78561"
+  },
+  "usuario": "NombreDeUsuario",
+  "titulo": "Re: Bienvenidos al Foro",
+  "contenido": "Si, excelente poder tener un espacio de expresión en estos temas",
+  "fecha": {
+    "$date": "2023-08-11T18:48:22.000Z"
+  },
+  "votos": 0,
+  "id_temaPost": "654bae73dd29b55b98d7853e",
+  "id_respuestaMadre": "654bae73dd29b55b98d7853e",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654f1169a5a438a12be70e11"
+  },
+  "usuario": "JovenesXelClima",
+  "titulo": "Cambio climático: el peligro de un candidato negacionista",
+  "contenido": "Qué se pone en juego cuando un político como Javier Milei, Jair Bolsonaro o Donald Trump ponen en duda la ciencia. Cómo el calentamiento global afecta la economía y nuestra vida.....",
+  "fecha": "2023-08-11",
+  "votos": 0,
+  "id_temaPost": "",
+  "id_respuestaMadre": ""
+},
+{
+  "_id": {
+    "$oid": "654f12e3a5a438a12be70e13"
+  },
+  "usuario": "Jose",
+  "titulo": "SPRINT capitulo Argentina: agroquimicos hasta en sangre, orina y materia fecal",
+  "contenido": "El organismo estatal de investigación agropecuaria prohibió la difusión de un estudio sobre plaguicidas en personas y en el ambiente. La afectada directa fue Virginia Aparicio, especialista del laboratorio INTA-Balcarce con larga trayectoria en la materia. La investigación es respaldada por la FAO, organismo de Naciones Unidas para el agro y la alimentación......",
+  "fecha": "2023-08-11",
+  "votos": 0,
+  "id_temaPost": "",
+  "id_respuestaMadre": ""
+}]

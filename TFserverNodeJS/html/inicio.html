@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <title>Foro de Discusión</title>
+    <style>
+        /*//////////////////////// Estilos para el encabezado //////////////////////////////////////*/
+        
+        /* Estilo del header*/
+        header {
+            background-color: #333;
+            color: #fff;
+            height: 20px;
+            padding: 20px 0;
+            text-align: center;
+            cursor: pointer;
+            font-size: 18px
+        }
+
+        header a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 20px;
+        }
+
+        header a:hover {
+            font-weight: bold;
+            color: green;
+        }
+        #usuarioOpciones {
+            float: right;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Fin de Estilo del header*/
+        
+        /* Estilo de los div principales y otros*/
+        #presentacionDiv {
+            width: 100%; /* Ocupa todo el ancho de la pantalla */
+            height: 100vh; /* 25% del alto de la pantalla */
+            background-image: url('./image/tierraArcoiris.jpg') ;
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        #presentacionDiv h2 {
+            font-style: italic;
+            text-align: center;
+            line-height: 1.3; /* Espacio entre líneas */
+            margin-bottom: 400px; /* Espacio inferior */
+            margin-left:300px;
+        }
+
+        #presentacionDiv h2 span {
+            display: block; /* Hace que el texto esté en líneas separadas */
+        }
+
+        #presentacionDiv h3 span{
+            font-size: 20px;
+            text-align: center;
+            display: block;
+        }
+        /* Fin de Estilo de los div principales y otros*/
+
+        /* FIN de Estilos para el encabezado */
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <a href="./inicio.html" id = "inicio">Inicio</a>
+        <a href="#">Temas</a>
+        <a href="#" id ="foroEnlace">Foro Web</a>
+        <div id="usuarioOpciones">
+            <a href="./formRegistro.html" id = "registrarse">Registrarse</a>
+            <a href="./formLogin.html" id = "login">Ingresar</a>
+        </div>
+    </header>
+
+    <div id="presentacionDiv">
+        <h2>
+            <span>"Somos lo que hacemos</span>
+            <span>para cambiar lo que somos"</span>
+        </h2>
+        <h3><span>Especio dedicado a temas ambientales</span>
+            <span>Actuemos ahora</span>
+        </h3>
+
+    </div>
+
+    <div id="principalDiv">
+        
+    </div>
+
+    <script>
+       
+          
+       $(document).ready(function () {
+        
+        
+                
+        header()
+
+        function header(){
+            let usuarioLocal = JSON.parse(localStorage.getItem('dataLogueo')); 
+            console.log(usuarioLocal);
+            if (usuarioLocal){
+                $('#registrarse').attr('href', '#').text(usuarioLocal.usuario);
+                $('#login').attr('href', './inicio.html').text('Cerrar Sesión');
+                $('#foroEnlace').attr('href', './ej_foro2.html');
+                $('#login').on('click', function () {
+                    localStorage.removeItem("dataLogueo");
+                    alert('Sesión cerrada');
+                })
+            }
+            else{
+                $('#foroEnlace').on('click', function () {
+                    alert('Debe iniciar sesion para acceder');
+                });
+               
+            }
+        } 
+        
+        
+
+        var sessionInfo;
+        getUsuarioServidor();
+        console.log(sessionInfo);
+        
+        function getUsuarioServidor(){
+                $.ajax({
+                url: 'http://localhost:3000/usuarios/getUser', 
+                type: 'GET',
+                success: function (data) {
+                    console.log('Respuesta del servidor:', data);
+                    sessionInfo = data; 
+                },
+                error: function (error) {
+                    //sessionInfo = error;  // utilizo para verificar si llego objeto cambiando config de getSession en controllers
+                    console.error('Error en la llamada AJAX:', error);
+                }
+            });
+                    
+            }
+            
+
+        }); 
+    
+      
+    </script>
+</body>
+</html>
